@@ -17,24 +17,24 @@ public class MySimpleStack implements SimpleStack {
     }
 
     @Override
-    public void push(Item item) {
+    public void push(final Item item) {
         this.stack.push(item);
     }
 
     @Override
     public Item peek() throws EmptyStackException {
-        try{
+        try {
             return this.stack.peek();
-        }catch(java.util.EmptyStackException e){
+        } catch (java.util.EmptyStackException e) {
             throw new EmptyStackException();
         }
     }
 
     @Override
     public Item pop() throws EmptyStackException {
-        try{
+        try {
             return this.stack.pop();
-        }catch(java.util.EmptyStackException e){
+        } catch (java.util.EmptyStackException e) {
             throw new EmptyStackException();
         }
     }
