@@ -6,6 +6,9 @@ public class MySimpleStack implements SimpleStack {
 
     private Stack<Item> stack = new Stack<Item>();
 
+    public int superUsefulFunction(){
+        return 2;
+    }
     @Override
     public boolean isEmpty() {
         return this.stack.empty();

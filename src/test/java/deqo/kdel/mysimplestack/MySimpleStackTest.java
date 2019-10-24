@@ -93,4 +93,9 @@ public class MySimpleStackTest {
         }
     }
 
+    @Test
+    public void testSuperUsefulFunction(){
+        assertEquals(mss.superUsefulFunction(),2);
+    }
+
 }
