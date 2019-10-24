@@ -89,7 +89,7 @@ public class MySimpleStackTest {
             actual = mss.pop().toString();
             assertEquals("item1",actual);
         }catch(EmptyStackException e){
-            fail("Pas d'exception attendue.");
+            fail("Pas d'exception attendue...");
         }
     }
 
