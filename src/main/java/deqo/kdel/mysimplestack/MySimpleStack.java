@@ -6,13 +6,14 @@ public class MySimpleStack implements SimpleStack {
 
     private Stack<Item> stack = new Stack<Item>();
 
-    public int superUsefulFunction(){
+    public int superUsefulFunction() {
         return 2;
     }
 
-    public int anotherSuperUsefulFunction(){
+    public int anotherSuperUsefulFunction() {
         return 3;
     }
+
     @Override
     public boolean isEmpty() {
         return this.stack.empty();
