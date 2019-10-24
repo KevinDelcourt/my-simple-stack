@@ -4,17 +4,20 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
 public class MySimpleStackTest {
 
     private MySimpleStack mss = new MySimpleStack();
-    private Item item1 = new Item();
-    private Item item2 = new Item();
+    private Item item1 = mock(Item.class);
+    private Item item2 = mock(Item.class);
+    ;
+
     @Before
     public void setUp() throws Exception {
-        this.item1.setName("item1");
-        this.item2.setName("item2");
+        when(item1.toString()).thenReturn("item1");
+        when(item2.toString()).thenReturn("item2");
     }
 
     @After
@@ -37,22 +40,22 @@ public class MySimpleStackTest {
 
     @Test
     public void testGetSizeEmpty() {
-        assertEquals(0,this.mss.getSize());
+        assertEquals(0, this.mss.getSize());
     }
 
     @Test
     public void testGetSizeNotEmpty() {
         mss.push(item1);
         mss.push(item2);
-        assertEquals(2,this.mss.getSize());
+        assertEquals(2, this.mss.getSize());
     }
 
     @Test
     public void testPeekEmpty() {
-        try{
+        try {
             mss.peek();
             fail("Aurait du être intercepté...");
-        }catch(EmptyStackException e){
+        } catch (EmptyStackException e) {
             assertTrue(true);
         }
     }
@@ -61,20 +64,24 @@ public class MySimpleStackTest {
     public void testPeek() {
         mss.push(item1);
         mss.push(item2);
-        try{
+        try {
             String actual = mss.peek().toString();
-            assertEquals("item2",actual);
-        }catch(EmptyStackException e){
+            assertEquals("item2", actual);
+            verifyZeroInteractions(item1);
+
+            //NB: réussit malgré le .toString() car mockito ne surveille pas .toString() (trop utilisé)
+            verifyZeroInteractions(item2);
+        } catch (EmptyStackException e) {
             fail("Pas d'exception attendue");
         }
     }
 
     @Test
     public void testPopEmpty() {
-        try{
+        try {
             mss.pop();
             fail("Aurait du être intercepté");
-        }catch(EmptyStackException e){
+        } catch (EmptyStackException e) {
             assertTrue(true);
         }
     }
@@ -83,23 +90,27 @@ public class MySimpleStackTest {
     public void testPop() {
         mss.push(item1);
         mss.push(item2);
-        try{
+        try {
             String actual = mss.pop().toString();
-            assertEquals("item2",actual);
+            assertEquals("item2", actual);
             actual = mss.pop().toString();
-            assertEquals("item1",actual);
-        }catch(EmptyStackException e){
+            assertEquals("item1", actual);
+
+            verify(item1, never()).setName(anyString());
+            //Exemple de test qui fail
+            //verify(item2, atLeastOnce()).triggerException();
+        } catch (Exception e) {
             fail("Pas d'exception attendue...");
         }
     }
 
     @Test
-    public void testSuperUsefulFunction(){
-        assertEquals(mss.superUsefulFunction(),2);
+    public void testSuperUsefulFunction() {
+        assertEquals(mss.superUsefulFunction(), 2);
     }
 
     @Test
-    public void testAnotherSuperUsefulFunction(){
-        assertEquals(mss.anotherSuperUsefulFunction(),8);
+    public void testAnotherSuperUsefulFunction() {
+        assertEquals(mss.anotherSuperUsefulFunction(), 8);
     }
 }
