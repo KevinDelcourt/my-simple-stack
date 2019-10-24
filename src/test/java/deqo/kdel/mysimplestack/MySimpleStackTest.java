@@ -51,7 +51,7 @@ public class MySimpleStackTest {
     public void testPeekEmpty() {
         try{
             mss.peek();
-            fail("Aurait du être intercepté.");
+            fail("Aurait du être intercepté...");
         }catch(EmptyStackException e){
             assertTrue(true);
         }
