@@ -11,7 +11,7 @@ public class MySimpleStack implements SimpleStack {
     }
 
     public int anotherSuperUsefulFunction() {
-        return 3;
+        return 5;
     }
 
     @Override
