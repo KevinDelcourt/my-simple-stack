@@ -100,6 +100,6 @@ public class MySimpleStackTest {
 
     @Test
     public void testAnotherSuperUsefulFunction(){
-        assertEquals(mss.anotherSuperUsefulFunction(),5);
+        assertEquals(mss.anotherSuperUsefulFunction(),8);
     }
 }
